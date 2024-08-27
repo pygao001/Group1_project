@@ -1,11 +1,11 @@
 import pool from '../config/db.js';
 import axios from 'axios';
 
-const stocks = ['TSLA', 'AAPL','GOOG','META','MSFT','AMZN','NVDA']; // 股票列表
+const stocks = ['TSLA','GOOG','META','AMZN','NVDA']; // 股票列表
 //const stocks = ['TSLA', 'AAPL','GOOG']
 const apiKey = 'Iro3Jt_eyDToQaqOPsd1zVmt5U1yMItk'; // 替换为你的 API key
-const startDate = '2023-01-09';
-const endDate = '2023-01-20';
+const startDate = '2023-01-01';
+const endDate = '2023-01-31';
 
 export async function fetchDailyPrice() {
     const createTableQuery = `
