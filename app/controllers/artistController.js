@@ -16,7 +16,7 @@ export const getArtistById = async (req, res) => {
         if (artist) {
             res.json(artist);
         } else {
-            res.status(404).send('Artist not found');
+            res.status(404).send('Artist not found123');
         }
     } catch (error) {
         res.status(500).send(error.message);
@@ -57,4 +57,33 @@ export const deleteArtist = async (req, res) => {
         res.status(500).send(error.message);
     }
 };
+
+export const getStocks = async (req, res) => {
+    try {
+        const stockData = await artistService.getStocks();
+        
+        if (stockData && stockData.length > 0) {
+            const transformedData = stockData.reduce((acc, curr) => {
+                const stock = acc.find(item => item.stock_name === curr.ticker);
+                if (stock) {
+                    stock.price.push(curr.c);
+                } else {
+                    acc.push({
+                        stock_name: curr.ticker,
+                        price: [curr.c]
+                    });
+                }
+                return acc;
+            }, []);
+            res.status(200).json(transformedData); // 使用 200 状态码返回数据
+        } else {
+            res.status(404).send('No stocks found');
+        }
+    } catch (error) {
+        console.error('Error fetching stocks:', error);
+        res.status(500).send(error.message);
+    }
+};
+
+
 
