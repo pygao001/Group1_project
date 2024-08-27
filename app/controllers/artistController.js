@@ -1,6 +1,8 @@
 
 import * as artistService from '../services/artistService.js';
 
+
+
 export const getArtists = async (req, res) => {
     try {
         const artists = await artistService.getAllArtists();
@@ -58,10 +60,13 @@ export const deleteArtist = async (req, res) => {
     }
 };
 
+
 export const getStocks = async (req, res) => {
     try {
-        const stockData = await artistService.getStocks();
-        
+        console.log('debug', req.body)
+        const { startDate, endDate } = req.body;
+        const stockData = await artistService.getStocks1(startDate, endDate);
+
         if (stockData && stockData.length > 0) {
             const transformedData = stockData.reduce((acc, curr) => {
                 const stock = acc.find(item => item.stock_name === curr.ticker);
@@ -85,5 +90,17 @@ export const getStocks = async (req, res) => {
     }
 };
 
+export const getMyStocks = async (req, res) => {
+    try {
+        const mystocks = await artistService.getMyStocks();
+        if (mystocks) {
+            res.json(mystocks)
+        } else {
+            res.status(404).send('error');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
 
 

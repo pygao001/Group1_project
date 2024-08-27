@@ -34,12 +34,21 @@ const deleteArtist = async (id) => {
     return result.affectedRows > 0;
 };
 
-const getStocks = async () => {
+const getMyStocks = async () => {   
     const [result] = await connection.query(
-        `SELECT ticker,c FROM daily_price WHERE t >= '2023-01-10' AND t <= '2023-01-15 order by t'`
+        `SELECT share_name,shares FROM stock_transactions  `
+    );
+
+    return result
+};
+
+
+const getStocks1 = async (startDate,endDate) => {
+    console.log(startDate,endDate)
+    const [result] = await connection.query(
+        `SELECT ticker,c FROM daily_price WHERE t >= ? AND t <= ? order by t `,[startDate,endDate]
     );
 
     return result;
 };
-
-export {createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist,getStocks}
+export {createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist,getMyStocks,getStocks1}
