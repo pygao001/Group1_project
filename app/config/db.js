@@ -4,7 +4,7 @@ const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'c0nygre',
-    database: 'stock_data',
+    database: 'music_db',
 });
 
 export default connection;
