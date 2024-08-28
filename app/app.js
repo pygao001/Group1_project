@@ -5,6 +5,8 @@ import express from 'express';
 import cors from 'cors'
 
 import artistRoutes from './routes/artistRoutes.js'
+import portfolioRoutes from './routes/PortfolioRoutes.js'
+
 const app = express();
 app.use(cors({
     origin: '*', // 允许所有来源
