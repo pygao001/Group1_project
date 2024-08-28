@@ -15,6 +15,8 @@ router.get('/', artistController.getArtists);
 router.post('/', artistController.createArtist);
 router.put('/:id', artistController.updateArtist);
 router.delete('/:id', artistController.deleteArtist);
-router.get('/getstocks', artistController.getStocks);
+router.post('/getstocks', artistController.getStocks); //fetching data for line chart
+router.get('/getMystocks', artistController.getMyStocks); // fetching data for my shares
+router.post('/addMystocks', artistController.addMyStocks); // buying a new stock
 
 export default router;

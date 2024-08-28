@@ -33,13 +33,64 @@ const deleteArtist = async (id) => {
     const [result] = await connection.query('DELETE FROM Artist WHERE id = ?', [id]);
     return result.affectedRows > 0;
 };
+function getDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const currentDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    return (currentDate);
+}
 
-const getStocks = async () => {
+
+
+const getMyStocks = async () => {
     const [result] = await connection.query(
-        `SELECT ticker,c FROM daily_price WHERE t >= '2023-01-10' AND t <= '2023-01-15 order by t'`
+        `SELECT share_name,shares FROM stock_transactions  `
+    );
+
+    return result
+};
+
+
+const getStocks = async (startDate, endDate) => {
+    console.log(startDate, endDate)
+    const [result] = await connection.query(
+        `SELECT ticker,c FROM daily_price WHERE t >= ? AND t <= ? order by t `, [startDate, endDate]
     );
 
     return result;
 };
 
-export {createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist,getStocks}
+const addMyStocks = async (stock_name, shares, price) => {
+    console.log(stock_name, shares, price)
+    try {
+        const [result] = await connection.query(
+            `SELECT share_name,shares FROM stock_transactions WHERE share_name = ? `, [stock_name]);
+            console.log(result)
+        if (result.length === 0) {
+            console.log('1')
+            const [insert_result] = await connection.query(
+                'INSERT INTO stock_transactions (share_name, shares, buy_in_date, buy_in_price, sold_out_price) values (?,?,?,?,?)',
+                [stock_name, shares, getDate(), price, null]);
+            return insert_result
+        }
+        else {
+            console.log('2')
+            const preSharesString = result[0].shares; 
+            const preShares = parseInt(preSharesString, 10); 
+            const [insert_result] = await connection.query(
+                'UPDATE stock_transactions set shares = ? where share_name = ?',
+                [shares + preShares, stock_name]);
+            return insert_result
+        }
+
+    } catch (error) {
+        console.log('error when fetching shares')
+    }
+
+
+
+
+};
+export { createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks }
