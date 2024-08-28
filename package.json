@@ -12,6 +12,8 @@
   "description": "express backend",
   "dependencies": {
     "axios": "^1.7.4",
+    "cars": "^1.1.6",
+    "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "date-fns": "^3.6.0",
     "express": "^4.19.2",

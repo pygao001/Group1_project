@@ -1,6 +1,6 @@
 // app.js
-import { fetchInsiderSentiment } from './services/insiderSentimentService.js';
-import { fetchDailyPrice } from './services/get_daily_price.js';
+//import { fetchInsiderSentiment } from './services/insiderSentimentService.js';
+//import { fetchDailyPrice } from './services/get_daily_price.js';
 import express from 'express';
 import cors from 'cors'
 
