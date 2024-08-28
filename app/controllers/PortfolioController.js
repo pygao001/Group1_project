@@ -33,7 +33,8 @@ export const Portfoliovalues = async (req, res) => {
             const sharesBought = {};
 
             stockData.forEach(({ ticker, c, t }) => {
-                const date = (typeof t === 'string' ? new Date(t) : t).toISOString().split('T')[0];
+                //const date = (typeof t === 'string' ? new Date(t) : t).toISOString().split('T')[0];
+                const date = t;
                 if (!initialPrices[ticker]) {
                 initialPrices[ticker] = c;
                 sharesBought[ticker] = weights[ticker] / c; // Number of shares bought
