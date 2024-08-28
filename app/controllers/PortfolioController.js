@@ -24,7 +24,7 @@ const calculatePortfolioValues = (groupedData, sharesBought) => {
 
 export const Portfoliovalues = async (req, res) => {
     try {
-        const stockData = await artistService.getStocks();
+        const stockData = await artistService.getStocks_old();
         
         if (stockData && stockData.length > 0) {
             

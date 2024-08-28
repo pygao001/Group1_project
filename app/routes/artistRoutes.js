@@ -2,6 +2,8 @@
 
 import express from 'express';
 import * as artistController from '../controllers/artistController.js';
+import * as PortfolioController from '../controllers/PortfolioController.js';
+
 
 /**
  * express.Router() is a mini Express application without the views or settings.
@@ -18,5 +20,7 @@ router.delete('/:id', artistController.deleteArtist);
 router.post('/getstocks', artistController.getStocks); //fetching data for line chart
 router.get('/getMystocks', artistController.getMyStocks); // fetching data for my shares
 router.post('/addMystocks', artistController.addMyStocks); // buying a new stock
+router.get('/getportfolio', PortfolioController.Portfoliovalues);
+
 
 export default router;
