@@ -118,3 +118,32 @@ export const addMyStocks = async (req, res) => {
 };
 
 
+
+export const getAllStocksList = async (req, res) => {
+    try {
+        const allStocksList = await artistService.getAllStocksList();
+        res.json(allStocksList);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+export const getMyStocksList = async (req, res) => {
+    try {
+        const myStocksList = await artistService.getMyStocksList();
+        res.json(myStocksList);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+export const sellStocks = async (req, res) => {
+    try {
+        const { stock_name, shares  } = req.body;
+        const sellResult = await artistService.sellStocks(stock_name, shares);
+        res.json(sellResult);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};

@@ -67,18 +67,15 @@ const addMyStocks = async (stock_name, shares, price) => {
     try {
         const [result] = await connection.query(
             `SELECT share_name,shares FROM stock_transactions WHERE share_name = ? `, [stock_name]);
-            console.log(result)
         if (result.length === 0) {
-            console.log('1')
             const [insert_result] = await connection.query(
                 'INSERT INTO stock_transactions (share_name, shares, buy_in_date, buy_in_price, sold_out_price) values (?,?,?,?,?)',
                 [stock_name, shares, getDate(), price, null]);
             return insert_result
         }
         else {
-            console.log('2')
-            const preSharesString = result[0].shares; 
-            const preShares = parseInt(preSharesString, 10); 
+            const preSharesString = result[0].shares;
+            const preShares = parseInt(preSharesString, 10);
             const [insert_result] = await connection.query(
                 'UPDATE stock_transactions set shares = ? where share_name = ?',
                 [shares + preShares, stock_name]);
@@ -89,8 +86,60 @@ const addMyStocks = async (stock_name, shares, price) => {
         console.log('error when fetching shares')
     }
 
-
-
-
 };
-export { createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks }
+const getAllStocksList = async () => {
+    const [rows] = await connection.query('SELECT ticker,round(avg(c),2) as price from daily_price group by ticker');
+    return rows;
+};
+
+const getMyStocksList = async () => {
+    const [rows] = await connection.query('SELECT *  from stock_transactions');
+    return rows;
+};
+
+const sellStocks = async (stock_name, shares) => {
+    try {
+        // Fetch current shares for the stock
+        const [result] = await connection.query(
+            `SELECT share_name, shares FROM stock_transactions WHERE share_name = ?`, [stock_name]
+        );
+
+        // Check if any stock was found
+        if (result.length === 0) {
+            return 'Stock not found';
+        }
+
+        // Parse current shares count
+        const preSharesString = result[0].shares;
+        const preShares = parseInt(preSharesString, 10);
+
+        // Check if there are enough shares to sell
+        if (preShares < shares) {
+            return 'You do not have enough shares';
+        }
+
+        // Check if the exact amount of shares are being sold
+        if (preShares === shares) {
+            const [sellResult] = await connection.query(
+                `DELETE FROM stock_transactions WHERE share_name = ?`, [stock_name]
+            );
+            return 'successfully selling stocks';
+        } else {
+            // Update shares if not selling all
+            const [sellResult] = await connection.query(
+                'UPDATE stock_transactions SET shares = ? WHERE share_name = ?',
+                [preShares - shares, stock_name]
+            );
+            return 'successfully selling stocks';
+        }
+    } catch (error) {
+        console.log('Error when fetching shares:', error);
+        throw error; // Re-throw the error for higher-level handling, if needed
+    }
+};
+
+
+
+export { createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks,getAllStocksList,
+    getMyStocksList,sellStocks
+ }

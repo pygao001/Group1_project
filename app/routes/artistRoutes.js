@@ -18,5 +18,7 @@ router.delete('/:id', artistController.deleteArtist);
 router.post('/getstocks', artistController.getStocks); //fetching data for line chart
 router.get('/getMystocks', artistController.getMyStocks); // fetching data for my shares
 router.post('/addMystocks', artistController.addMyStocks); // buying a new stock
-
+router.get('/getAllStocksList', artistController.getAllStocksList); // when buying stocks, retrieve all the stocks in the db
+router.get('/getMyStocksList', artistController.getMyStocksList); // when selling stocks, retrieve all the stocks that i have
+router.post('/sellStocks', artistController.sellStocks); // when selling stocks, retrieve all the stocks that i have
 export default router;
