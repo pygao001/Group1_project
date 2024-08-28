@@ -44,7 +44,8 @@ export const Portfoliovalues = async (req, res) => {
                     
             // Step 2: Calculate portfolio value and group data by time
             const groupedByTime = stockData.reduce((acc, { ticker, c, t }) => {
-                const date = (typeof t === 'string' ? new Date(t) : t).toISOString().split('T')[0];
+                //const date = (typeof t === 'string' ? new Date(t) : t).toISOString().split('T')[0];
+                const date = t;
                 if (!acc[date]) acc[date] = [];
                 acc[date].push({ ticker, currentPrice: c });
                 return acc;
