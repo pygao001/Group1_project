@@ -21,6 +21,7 @@ router.post('/getstocks', artistController.getStocks); //fetching data for line 
 router.get('/getMystocks', artistController.getMyStocks); // fetching data for my shares
 router.post('/addMystocks', artistController.addMyStocks); // buying a new stock
 router.get('/getportfolio', PortfolioController.Portfoliovalues);
+router.get('/getportfolio_old', PortfolioController.Portfoliovalues_old);
 
 
 export default router;
