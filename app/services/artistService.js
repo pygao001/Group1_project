@@ -148,5 +148,5 @@ const sellStocks = async (stock_name, shares) => {
 
 
 
-export {getMyStocks, getStocks, addMyStocks ,getStocks_old, createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks,getAllStocksList,
+export {  getStocks_old, createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks,getAllStocksList,
     getMyStocksList,sellStocks}
