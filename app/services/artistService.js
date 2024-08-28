@@ -53,14 +53,6 @@ const getMyStocks = async () => {
 };
 
 
-const getStocks_old = async () => {
-    const [result] = await connection.query(
-        `SELECT ticker,c,t FROM daily_price WHERE t >= '2024-07-01' AND t <= '2024-07-31 order by t'`
-    );
-
-    return result;
-};
-
 const getStocks = async (startDate, endDate) => {
     console.log(startDate, endDate)
     const [result] = await connection.query(
@@ -148,5 +140,6 @@ const sellStocks = async (stock_name, shares) => {
 
 
 
-export {  getStocks_old, createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks,getAllStocksList,
-    getMyStocksList,sellStocks}
+export { createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks,getAllStocksList,
+    getMyStocksList,sellStocks
+ }
