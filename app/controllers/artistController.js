@@ -65,7 +65,7 @@ export const getStocks = async (req, res) => {
     try {
         console.log('debug', req.body)
         const { startDate, endDate } = req.body;
-        const stockData = await artistService.getStocks1(startDate, endDate);
+        const stockData = await artistService.getStocks(startDate, endDate);
 
         if (stockData && stockData.length > 0) {
             const transformedData = stockData.reduce((acc, curr) => {
@@ -95,6 +95,20 @@ export const getMyStocks = async (req, res) => {
         const mystocks = await artistService.getMyStocks();
         if (mystocks) {
             res.json(mystocks)
+        } else {
+            res.status(404).send('error');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+export const addMyStocks = async (req, res) => {
+    try {
+        const { stock_name, shares,price } = req.body;
+        const stockAddingResult = await artistService.addMyStocks(stock_name, shares,price);
+        if (stockAddingResult) {
+            res.json(stockAddingResult)
         } else {
             res.status(404).send('error');
         }
