@@ -46,12 +46,20 @@ function getDate() {
 
 const getMyStocks = async () => {
     const [result] = await connection.query(
-        `SELECT share_name,shares FROM stock_transactions  `
+        `SELECT share_name, shares, buy_in_date, buy_in_price FROM stock_transactions  `
     );
 
     return result
 };
 
+
+// const getStocks_old = async () => {
+//     const [result] = await connection.query(
+//         `SELECT ticker,c,t FROM daily_price WHERE t >= '2023-01-03' AND t <= '2023-01-20 order by t'`
+//     );
+
+//     return result;
+// };
 
 const getStocks = async (startDate, endDate) => {
     console.log(startDate, endDate)
@@ -141,8 +149,6 @@ const sellStocks = async (stock_name, shares) => {
         throw error; // Re-throw the error for higher-level handling, if needed
     }
 };
-
-
 
 export { createArtist, deleteArtist, getAllArtists, getArtistById, updateArtist, getMyStocks, getStocks, addMyStocks,getAllStocksList,
     getMyStocksList,sellStocks

@@ -24,7 +24,6 @@ router.get('/getAllStocksList', artistController.getAllStocksList); // when buyi
 router.get('/getMyStocksList', artistController.getMyStocksList); // when selling stocks, retrieve all the stocks that i have
 router.post('/sellStocks', artistController.sellStocks); // when selling stocks, retrieve all the stocks that i have
 router.get('/getportfolio', PortfolioController.Portfoliovalues);
-router.get('/getportfolio_old', PortfolioController.Portfoliovalues_old);
 
 
 export default router;
