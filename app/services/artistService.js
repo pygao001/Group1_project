@@ -46,7 +46,7 @@ function getDate() {
 
 const getMyStocks = async () => {
     const [result] = await connection.query(
-        `SELECT share_name,shares FROM stock_transactions  `
+        `SELECT share_name, shares, buy_in_date, buy_in_price FROM stock_transactions  `
     );
 
     return result
@@ -55,7 +55,7 @@ const getMyStocks = async () => {
 
 const getStocks_old = async () => {
     const [result] = await connection.query(
-        `SELECT ticker,c,t FROM daily_price WHERE t >= '2024-07-01' AND t <= '2024-07-31 order by t'`
+        `SELECT ticker,c,t FROM daily_price WHERE t >= '2023-01-03' AND t <= '2023-01-20 order by t'`
     );
 
     return result;

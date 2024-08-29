@@ -52,9 +52,7 @@ export const Portfoliovalues_old = async (req, res) => {
             }, {});
 
             const portfolioValues = calculatePortfolioValues(groupedByTime, sharesBought);
-
-  
-            
+              
             res.status(200).json(portfolioValues);
             
 
@@ -100,10 +98,7 @@ export const Portfoliovalues = async (req, res) => {
 
           const portfolioValues = calculatePortfolioValues(groupedByTime, sharesBought);
 
-
-          
           res.status(200).json(portfolioValues);
-          
 
          } else {
           res.status(404).send('No stocks found');
