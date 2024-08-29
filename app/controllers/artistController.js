@@ -105,6 +105,7 @@ export const getMyStocks = async (req, res) => {
 
 export const addMyStocks = async (req, res) => {
     try {
+        
         const { stock_name, price ,shares} = req.body; 
         const stockAddingResult = await artistService.addMyStocks(stock_name, shares,price);
         if (stockAddingResult) {
@@ -140,8 +141,9 @@ export const getMyStocksList = async (req, res) => {
 
 export const sellStocks = async (req, res) => {
     try {
+        console.log('hello',req.body)
         const { stock_name, shares  } = req.body;
-        console.log('debug',req.body)
+        console.log('debug1111',stock_name,shares)
         const sellResult = await artistService.sellStocks(stock_name, shares);
         res.json(sellResult);
     } catch (error) {
