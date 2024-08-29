@@ -71,22 +71,25 @@ const getStocks = async (startDate, endDate) => {
 };
 
 const addMyStocks = async (stock_name, shares, price) => {
-    console.log(stock_name, shares, price)
     try {
         const [result] = await connection.query(
             `SELECT share_name,shares FROM stock_transactions WHERE share_name = ? `, [stock_name]);
         if (result.length === 0) {
+
             const [insert_result] = await connection.query(
                 'INSERT INTO stock_transactions (share_name, shares, buy_in_date, buy_in_price, sold_out_price) values (?,?,?,?,?)',
                 [stock_name, shares, getDate(), price, null]);
             return insert_result
         }
         else {
+            
             const preSharesString = result[0].shares;
             const preShares = parseInt(preSharesString, 10);
+            console.log('111',preShares,shares)
             const [insert_result] = await connection.query(
                 'UPDATE stock_transactions set shares = ? where share_name = ?',
                 [shares + preShares, stock_name]);
+            console.log('re',insert_result)
             return insert_result
         }
 
@@ -108,6 +111,7 @@ const getMyStocksList = async () => {
 const sellStocks = async (stock_name, shares) => {
     try {
         // Fetch current shares for the stock
+        console.log('debug',stock_name,shares)
         const [result] = await connection.query(
             `SELECT share_name, shares FROM stock_transactions WHERE share_name = ?`, [stock_name]
         );
