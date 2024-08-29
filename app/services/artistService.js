@@ -111,7 +111,7 @@ const getMyStocksList = async () => {
 const sellStocks = async (stock_name, shares) => {
     try {
         // Fetch current shares for the stock
-        console.log('debug',stock_name,shares)
+        console.log('debug2222',stock_name,shares)
         const [result] = await connection.query(
             `SELECT share_name, shares FROM stock_transactions WHERE share_name = ?`, [stock_name]
         );

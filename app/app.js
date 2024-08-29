@@ -5,10 +5,6 @@ import express from 'express';
 import cors from 'cors'
 
 import artistRoutes from './routes/artistRoutes.js'
-<<<<<<< HEAD
-// import portfolioRoutes from './routes/PortfolioRoutes.js'
-=======
->>>>>>> e3e6d166ac7f548a987925b1019c38f8eac7dfad
 
 const app = express();
 app.use(cors({
