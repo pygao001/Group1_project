@@ -1,4 +1,4 @@
-import * as artistService from '../services/artistService.js';
+import * as stockService from '../services/stockService.js';
 //add by tony
 //necessary functions
 // Calculate portfolio values
@@ -24,7 +24,7 @@ const calculatePortfolioValues = (groupedData, sharesBought) => {
 
 export const Portfoliovalues_old = async (req, res) => {
     try {
-        const stockData = await artistService.getStocks_old();
+        const stockData = await stockService.getStocks_old();
         
         if (stockData && stockData.length > 0) {
             
@@ -69,7 +69,7 @@ export const Portfoliovalues_old = async (req, res) => {
 export const Portfoliovalues = async (req, res) => {
   try {
       const {startDate,endDate} = req.body;
-      const stockData = await artistService.getStocks(startDate,endDate);
+      const stockData = await stockService.getStocks(startDate,endDate);
       
       if (stockData && stockData.length > 0) {
           
