@@ -1,59 +1,59 @@
 
-import * as artistService from '../services/artistService.js';
+import * as stockService from '../services/stockService.js';
 
 
 
-export const getArtists = async (req, res) => {
+export const getstocks = async (req, res) => {
     try {
-        const artists = await artistService.getAllArtists();
-        res.json(artists);
+        const stocks = await stockService.getAllstocks();
+        res.json(stocks);
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
 
-export const getArtistById = async (req, res) => {
+export const getstockById = async (req, res) => {
     try {
-        const artist = await artistService.getArtistById(req.params.id);
-        if (artist) {
-            res.json(artist);
+        const stock = await stockService.getstockById(req.params.id);
+        if (stock) {
+            res.json(stock);
         } else {
-            res.status(404).send('Artist not found123');
+            res.status(404).send('stock not found123');
         }
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
 
-export const createArtist = async (req, res) => {
+export const createstock = async (req, res) => {
     try {
-        const newArtist = await artistService.createArtist(req.body);
-        res.status(201).json(newArtist);
+        const newstock = await stockService.createstock(req.body);
+        res.status(201).json(newstock);
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
 
-export const updateArtist = async (req, res) => {
+export const updatestock = async (req, res) => {
     try {
-        const updatedArtist = await artistService.updateArtist(req.params.id, req.body);
-        if (updatedArtist) {
-            res.json(updatedArtist);
+        const updatedstock = await stockService.updatestock(req.params.id, req.body);
+        if (updatedstock) {
+            res.json(updatedstock);
         } else {
-            res.status(404).send('Artist not found');
+            res.status(404).send('stock not found');
         }
     } catch (error) {
         res.status(500).send(error.message);
     }
 };
 
-export const deleteArtist = async (req, res) => {
+export const deletestock = async (req, res) => {
     try {
-        const deleted = await artistService.deleteArtist(req.params.id);
+        const deleted = await stockService.deletestock(req.params.id);
         if (deleted) {
             res.status(204).send();
         } else {
-            res.status(404).send('Artist not found');
+            res.status(404).send('stock not found');
         }
     } catch (error) {
         res.status(500).send(error.message);
@@ -65,7 +65,7 @@ export const getStocks = async (req, res) => {
     try {
         console.log('debug', req.body)
         const { startDate, endDate } = req.body;
-        const stockData = await artistService.getStocks(startDate, endDate);
+        const stockData = await stockService.getStocks(startDate, endDate);
 
         if (stockData && stockData.length > 0) {
             const transformedData = stockData.reduce((acc, curr) => {
@@ -92,7 +92,7 @@ export const getStocks = async (req, res) => {
 
 export const getMyStocks = async (req, res) => {
     try {
-        const mystocks = await artistService.getMyStocks();
+        const mystocks = await stockService.getMyStocks();
         if (mystocks) {
             res.json(mystocks)
         } else {
@@ -107,7 +107,7 @@ export const addMyStocks = async (req, res) => {
     try {
         
         const { stock_name, price ,shares} = req.body; 
-        const stockAddingResult = await artistService.addMyStocks(stock_name, shares,price);
+        const stockAddingResult = await stockService.addMyStocks(stock_name, shares,price);
         if (stockAddingResult) {
             res.json(stockAddingResult)
         } else {
@@ -122,7 +122,7 @@ export const addMyStocks = async (req, res) => {
 
 export const getAllStocksList = async (req, res) => {
     try {
-        const allStocksList = await artistService.getAllStocksList();
+        const allStocksList = await stockService.getAllStocksList();
         res.json(allStocksList);
     } catch (error) {
         res.status(500).send(error.message);
@@ -132,7 +132,7 @@ export const getAllStocksList = async (req, res) => {
 
 export const getMyStocksList = async (req, res) => {
     try {
-        const myStocksList = await artistService.getMyStocksList();
+        const myStocksList = await stockService.getMyStocksList();
         res.json(myStocksList);
     } catch (error) {
         res.status(500).send(error.message);
@@ -144,7 +144,7 @@ export const sellStocks = async (req, res) => {
         console.log('hello',req.body)
         const { stock_name, shares  } = req.body;
         console.log('debug1111',stock_name,shares)
-        const sellResult = await artistService.sellStocks(stock_name, shares);
+        const sellResult = await stockService.sellStocks(stock_name, shares);
         res.json(sellResult);
     } catch (error) {
         res.status(500).send(error.message);

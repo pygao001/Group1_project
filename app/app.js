@@ -4,7 +4,7 @@
 import express from 'express';
 import cors from 'cors'
 
-import artistRoutes from './routes/artistRoutes.js'
+import stockRoutes from './routes/stockRoutes.js'
 
 const app = express();
 app.use(cors({
@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use(express.json()); // More modern approach than using the body-parser library. it is now not required.
 
-app.use('/artists', artistRoutes);
+app.use('/stocks', stockRoutes);
 
 // await fetchDailyPrice().catch(err => console.error('Error running fetchInsiderSentiment function:', err));
 // await fetchInsiderSentiment().catch(err => console.error('Error running fetchInsiderSentiment function:', err));
