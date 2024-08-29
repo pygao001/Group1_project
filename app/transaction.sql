@@ -12,9 +12,9 @@ INSERT INTO stock_transactions (share_name, shares, buy_in_date, buy_in_price, s
 VALUES
     ('GOOG', 350, '2024-08-01', 139.00, NULL),
     ('AMZN', 150, '2024-08-02', 149.93, NULL),
-    ('AAPL', 300, '2024-08-03', 185.25, NULL),
-    ('META', 200, '2024-08-04', 346.29, NULL),
-    ('NVDA', 100, '2024-08-05', 48.17, NULL);  -- Shares not sold yet
+    ('TSLA', 300, '2024-08-02', 207.67, NULL),
+    ('META', 200, '2024-08-05', 346.29, NULL),
+    ('NVDA', 300, '2024-08-05', 48.17, NULL);  -- Shares not sold yet
  
 
 
